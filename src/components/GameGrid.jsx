@@ -5,8 +5,9 @@ import GameCard from "./GameCards";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 
-const GameGrid = ({ selectedGenre }) => {
-  const { data, error, isLoading } = useGames(selectedGenre);
+const GameGrid = ({ selectedGenre, selectedPlatform }) => {
+  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
+
   const Skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>

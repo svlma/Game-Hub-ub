@@ -26,7 +26,9 @@ const GenreList = ({ selectedGenre, onselectGenre }) => {
               src={getCroppedImageUrl(genre.image_background)}
             />
             <Button
-              color={genre.id === selectedGenre?.id ? "Highlight" : "GrayText"}
+              color={
+                genre.id === selectedGenre?.id ? "Highlight" : "ThreeDShadow"
+              }
               fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               onClick={() => onselectGenre(genre)}
               fontSize="lg"
