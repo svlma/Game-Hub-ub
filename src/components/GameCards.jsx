@@ -3,6 +3,7 @@ import React from "react";
 import PlatformIconList from "./PlatformIconList";
 import CriticsScore from "./CriticsScore";
 import getCroppedImageUrl from "../services/image-url";
+
 const GameCard = ({ game }) => {
   return (
     <Card>
