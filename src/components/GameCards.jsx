@@ -5,6 +5,9 @@ import CriticsScore from "./CriticsScore";
 import getCroppedImageUrl from "../services/image-url";
 
 const GameCard = ({ game }) => {
+  if (!game || !Array.isArray(game.parent_platforms)) {
+    return;
+  }
   return (
     <Card>
       <Image src={getCroppedImageUrl(game.background_image)} />

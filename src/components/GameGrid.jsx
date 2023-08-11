@@ -21,11 +21,13 @@ const GameGrid = ({ gameQuery }) => {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      {data?.results.map((game) => (
-        <GameCardContainer key={game.id}>
-          <GameCard game={game} />
-        </GameCardContainer>
-      ))}
+      {data?.results
+        .filter((game) => game.parent_platforms)
+        .map((game) => (
+          <GameCardContainer key={game.id}>
+            <GameCard game={game} />
+          </GameCardContainer>
+        ))}
     </SimpleGrid>
   );
 };
