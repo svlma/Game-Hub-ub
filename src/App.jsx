@@ -7,10 +7,7 @@ import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [selectedPlatform, setSelectedPlatform] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState({});
-  const [searchText, setSearchText] = useState([]);
+  const [gameQuery, setGameQuery] = useState({});
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
@@ -18,16 +15,16 @@ function App() {
     >
       <GridItem area="nav">
         <NavBar
-          searchText={searchText}
-          onSearch={(searchText) => setSearchText(searchText)}
+          searchText={gameQuery.search}
+          onSearch={(search) => setGameQuery({ ...gameQuery, search })}
         />
       </GridItem>
 
       <Show above="lg">
         <GridItem area="aside" paddingX="8px">
           <GenreList
-            selectedGenre={selectedGenre}
-            onselectGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={gameQuery.genre}
+            onselectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
           />
         </GridItem>
       </Show>
@@ -35,29 +32,26 @@ function App() {
       <GridItem area="main">
         <Box paddingLeft={2}>
           <GameHeading
-            selectedGenre={selectedGenre}
-            selectedPlatform={selectedPlatform}
+            selectedGenre={gameQuery.genre}
+            selectedPlatform={gameQuery.platform}
           />
           <HStack spacing={5} marginBottom={5}>
             <PlatformSelector
-              selectedPlatform={selectedPlatform}
-              onSelectPlatform={(platform) => setSelectedPlatform(platform)}
+              selectedPlatform={gameQuery.platform}
+              onSelectPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
             />
             <SortSelector
-              onSelectSortOrder={(selectedOrder) =>
-                setSelectedOrder(selectedOrder)
+              onSelectSortOrder={(ordering) =>
+                setGameQuery({ ...gameQuery, ordering })
               }
-              selectedOrder={selectedOrder}
+              selectedOrder={gameQuery.ordering}
             />
           </HStack>
         </Box>
 
-        <GameGrid
-          selectedPlatform={selectedPlatform}
-          selectedGenre={selectedGenre}
-          selectedOrder={selectedOrder}
-          searchText={searchText}
-        />
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
