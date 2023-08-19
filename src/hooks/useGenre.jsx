@@ -1,15 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import genres from "../data/genres";
-import APIClient from "../services/api-client";
-
-const apiClient = new APIClient("/genres");
-const useGenre = () => {
-  return useQuery({
-    queryKey: ["genres"],
-    queryFn: apiClient.getAll,
-    staleTime: 24 * 60 * 60 * 100, //24h
-    initialData: { count: genres.length, results: genres },
-  });
+import React from "react";
+import useGenres from "./useGenres";
+const useGenre = (id) => {
+  const { data: genres } = useGenres();
+  return genres?.results.find((g) => g.id === id);
 };
 
 export default useGenre;
