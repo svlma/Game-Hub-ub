@@ -5,7 +5,7 @@ import DefinitionItems from "../components/DefinitionItems";
 
 const GameAttributes = ({ game }) => {
   return (
-    <SimpleGrid columns={2} as={dl}>
+    <SimpleGrid columns={2} as="dl">
       <DefinitionItems term="Platforms">
         {game.parent_platforms?.map(({ platform }) => (
           <Text key={platform.id}>{platform.name}</Text>
