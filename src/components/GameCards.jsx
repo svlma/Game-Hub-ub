@@ -3,6 +3,7 @@ import React from "react";
 import PlatformIconList from "./PlatformIconList";
 import CriticsScore from "./CriticsScore";
 import getCroppedImageUrl from "../services/image-url";
+import { Link } from "react-router-dom";
 
 const GameCard = ({ game }) => {
   if (!game || !Array.isArray(game.parent_platforms)) {
@@ -18,7 +19,9 @@ const GameCard = ({ game }) => {
           />
           <CriticsScore score={game.metacritic} />
         </HStack>
-        <Heading fontSize="2xl">{game.name}</Heading>
+        <Heading fontSize="2xl">
+          <Link to={"/games/" + game.slug}>{game.name}</Link>
+        </Heading>
       </CardBody>
     </Card>
   );
